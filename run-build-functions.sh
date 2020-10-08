@@ -195,9 +195,11 @@ install_dependencies() {
   fi
 
   # Node version
+  echo "start Node version"
   source $NVM_DIR/nvm.sh
   : ${NODE_VERSION="$defaultNodeVersion"}
 
+  echo "restore only non-existing cached versions"
   # restore only non-existing cached versions
   if [[ $(ls $NETLIFY_CACHE_DIR/node_version/) ]]
   then
@@ -208,6 +210,7 @@ install_dependencies() {
     echo "Finished restoring cached node version"
   fi
 
+  echo "-f .nvmrc"
   if [ -f .nvmrc ]
   then
     NODE_VERSION=$(cat .nvmrc)
@@ -218,6 +221,9 @@ install_dependencies() {
     echo "Attempting node version '$NODE_VERSION' from .node-version"
   fi
 
+  echo "nvm install --no-progress $NODE_VERSION"
+  # nvm ls-remote -> N/Aだったので名前解決できてないことに気づいた
+  echo "start nvm install"
   if nvm install --no-progress $NODE_VERSION
   then
     NODE_VERSION=$(nvm current)
@@ -458,7 +464,7 @@ install_dependencies() {
   if [ -f package.json ]
   then
     restore_cwd_cache node_modules "node modules"
-    if [ "$NETLIFY_USE_YARN" = "true" ] || ([ "$NETLIFY_USE_YARN" != "false" ] && [ -f yarn.lock ]) 
+    if [ "$NETLIFY_USE_YARN" = "true" ] || ([ "$NETLIFY_USE_YARN" != "false" ] && [ -f yarn.lock ])
     then
       run_yarn $YARN_VERSION
     else
@@ -471,7 +477,7 @@ install_dependencies() {
   then
     if ! [ $(which bower) ]
     then
-      if [ "$NETLIFY_USE_YARN" = "true" ] || ([ "$NETLIFY_USE_YARN" != "false" ] && [ -f yarn.lock ]) 
+      if [ "$NETLIFY_USE_YARN" = "true" ] || ([ "$NETLIFY_USE_YARN" != "false" ] && [ -f yarn.lock ])
       then
         echo "Installing bower with Yarn"
         yarn add bower
