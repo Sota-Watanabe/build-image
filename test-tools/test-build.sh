@@ -58,6 +58,7 @@ docker run --rm \
        -v "${BASE_PATH}/run-build.sh:/opt/build-bin/build" \
        -v "${BASE_PATH}/run-build-functions.sh:/opt/build-bin/run-build-functions.sh" \
        -v $PWD/$T/cache:/opt/buildhome/cache \
+       -v /etc/resolv.conf:/etc/resolv.conf \
        -w /opt/build \
        -it \
        $NETLIFY_IMAGE $SCRIPT
