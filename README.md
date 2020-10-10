@@ -1,3 +1,9 @@
+# Netlifyで利用されているコンテナイメージ
+研究で利用する
+
+以下はフォーク元の記述
+---
+
 # Netlify Build Image
 
 This repository contains the tools to make the build image that Netlify's continuous deployment buildbot uses to build a site from a connected Git repository.
