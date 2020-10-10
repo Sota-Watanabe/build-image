@@ -17,4 +17,5 @@ docker run --rm -t -i \
 	-v ${REPO_PATH}:/opt/repo \
 	-v ${BASE_PATH}/run-build.sh:/opt/build-bin/build \
 	-v ${BASE_PATH}/run-build-functions.sh:/opt/build-bin/run-build-functions.sh \
+	-v /etc/resolv.conf:/etc/resolv.conf \
 	$NETLIFY_IMAGE /bin/bash
