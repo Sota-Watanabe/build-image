@@ -1,6 +1,16 @@
 #!/bin/bash
 
-dir="$(dirname "$0")"
+# 使い方
+# . /opt/build-bin/build
+# これでビルドに必要なパッケージがインストールされる
+
+# dir="$(dirname "$0")"
+# /opt/build-bin/build yarn run export で実行すると子プロセスでやるため、パスが親プロセスに継承されない
+# . /opt/build-bin/build yarn run export やsourceでやると、カレントシェル上でやるためシェルでyarnコマンドが使える
+# その場合、dirがbinになってしまったので、dirを自分で指定した
+
+dir="/opt/build-bin"
+echo "dir="$dir
 : ${NETLIFY_REPO_URL="/opt/repo"}
 NETLIFY_BUILD_BASE="/opt/buildhome"
 
@@ -39,4 +49,5 @@ echo "Executing user command: $cmd"
 eval "$cmd"
 CODE=$?
 
-exit $CODE
+# exit $CODE
+# カレントシェル上でやるとコンテナからでてしまうので削除
