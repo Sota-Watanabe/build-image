@@ -1,8 +1,7 @@
 # Netlifyで利用されているコンテナイメージ
 研究で利用する
 
-以下はフォーク元の記述
----
+以下はフォーク元の記述だが、ちょっと自分用に変更してある。
 
 # Netlify Build Image
 
@@ -60,7 +59,7 @@ If the command works correctly, you should see a new prompt, with the user `buil
 In the buildbot shell, run `build` followed by your site build command. For example, for a site build command of `npm run build`, you would run the following:
 
 ```
-/opt/build-bin/build npm run build
+source /opt/build-bin/build npm run build
 ```
 
 This will run the build as it would run on Netlify, displaying logs in your terminal as it goes. When you are done testing, you can exit the buildbot shell by typing `exit`.
