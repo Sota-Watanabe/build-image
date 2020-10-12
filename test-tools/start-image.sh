@@ -4,7 +4,7 @@ BASE_PATH=$(pwd)
 REPO_PATH=$(cd $1 && pwd)
 : ${NETLIFY_IMAGE="netlify/build:xenial"}
 
-docker run --rm -t -i \
+docker run -t -i \
 	-e NODE_VERSION \
 	-e NPM_VERSION \
 	-e RUBY_VERSION \
@@ -18,4 +18,5 @@ docker run --rm -t -i \
 	-v ${BASE_PATH}/run-build.sh:/opt/build-bin/build \
 	-v ${BASE_PATH}/run-build-functions.sh:/opt/build-bin/run-build-functions.sh \
 	-v /etc/resolv.conf:/etc/resolv.conf \
+	--name netlify-build-image \
 	$NETLIFY_IMAGE /bin/bash
